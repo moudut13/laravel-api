@@ -1,11 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
+use App\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
-class UserController extends Controller
+class CustomerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +17,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return $data = Customer::all();
     }
 
     /**
@@ -35,7 +38,15 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = strtolower($request->name);
+        $name = ucwords($data);
+        Customer::create([
+            'name' => $name,
+            'slug' => str::slug($request->name),
+            'username' => str::lower(str::slug($request->username)),
+            'email' => str::lower($request->email),
+            'password' => Hash::make($request->password),
+        ]);
     }
 
     /**
@@ -80,6 +91,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Customer::find($id);
+        $data->delete();
     }
 }
