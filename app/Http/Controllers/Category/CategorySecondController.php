@@ -3,19 +3,20 @@
 namespace App\Http\Controllers\Category;
 
 use App\Http\Controllers\Controller;
-use App\Models\CategoryFirst;
+use App\Models\CategorySecond;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
-class CategoryController extends Controller
+class CategorySecondController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function indexFirst()
+    public function index()
     {
-        return $data = CategoryFirst::all();
+        return $data = CategorySecond::all();
     }
 
     /**
@@ -36,7 +37,11 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        CategorySecond::create([
+            'categoryfirst_id' => $request->categoryfirst_id,
+            'name' => $request->name,
+            'slug' => str::slug($request->name),
+        ]);
     }
 
     /**
@@ -81,7 +86,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $tags = CategoryFirst::find($id);
-        $tags->delete();
+        $categorySecond = CategorySecond::find($id);
+        $categorySecond->delete();
     }
 }

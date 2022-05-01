@@ -2,7 +2,9 @@
 
 
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Category\CategoryController;
+use App\Http\Controllers\Category\CategoryFirstController;
+use App\Http\Controllers\Category\CategorySecondController;
+use App\Http\Controllers\Category\CategoryThirdController;
 use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
@@ -49,8 +51,19 @@ Route::get('/tags',[TagsController::class ,'index']);
 Route::post('/tags',[TagsController::class , 'store']);
 Route::delete('/tags/{id}',[TagsController::class , 'destroy']);
 
-//Category Route list
-Route::get('/category',[CategoryController::class ,'indexFirst']);
-Route::delete('/category/{id}',[CategoryController::class ,'destroy']);
+//Category First Route list
+Route::get('/category',[CategoryFirstController::class ,'index']);
+Route::post('/category',[CategoryFirstController::class ,'store']);
+Route::delete('/category/{id}',[CategoryFirstController::class ,'destroy']);
+
+//Category Second Route list
+Route::get('/category-second',[CategorySecondController::class ,'index']);
+Route::post('/category-second',[CategorySecondController::class ,'store']);
+Route::delete('/category-second/{id}',[CategorySecondController::class ,'destroy']);
+
+//Category Third Route list
+Route::get('/category-third',[CategoryThirdController::class ,'index']);
+Route::post('/category-third',[CategoryThirdController::class ,'store']);
+Route::delete('/category-third/{id}',[CategoryThirdController::class ,'destroy']);
 
 
